@@ -22,3 +22,17 @@ How to use LLM models for chatbot
         Solar	10.7B	6.1GB	ollama run solar
 3. pull the model on your project follow the commands
 ollama pull llama3.2
+
+===================================================================================
+Rag Pipeline:
+
+A RAG (Retrieval-Augmented Generation) pipeline is a way for AI to answer questions by using two steps:
+
+Find information (Retrieval): When you ask a question, the system first looks for relevant information 
+from a database or documents. For example, if you ask about the weather, it will find recent weather reports.
+
+Create a response (Generation): After finding the information, the system uses an AI model (like ChatGPT) 
+to create a clear and useful answer based on both the information it found and your question.
+
+load data -> convert data into chunks -> apply embedding into chunks -> store into vecots data base -> Query and Retrieve Relevant Chunks
+-> Combine and Generate a Response -> Return the Answer 
