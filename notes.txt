@@ -23,6 +23,9 @@ How to use LLM models for chatbot
 3. pull the model on your project follow the commands
 ollama pull llama3.2
 
+IMP: Always remember that to use llama3.2 or any other model it should run backend
+to run this use cmd: ollama run llama3.2
+
 ===================================================================================
 Rag Pipeline:
 
@@ -35,4 +38,36 @@ Create a response (Generation): After finding the information, the system uses a
 to create a clear and useful answer based on both the information it found and your question.
 
 load data -> convert data into chunks -> apply embedding into chunks -> store into vecots data base -> Query and Retrieve Relevant Chunks
--> Combine and Generate a Response -> Return the Answer 
+-> Combine and Generate a Response -> Return the Answer
+
+====================================================================================
+Chain and Retrieveer
+A chain in LangChain is a sequence of actions or processes that take input, transform it, and produce an output.
+A retriever is a component that helps in fetching relevant data from a database or document source based on a query.
+
+user input -> retriever -> LLM,Prompt [create_stuff_documents_chain] after that we wil get the response
+1. user input 
+2. that input will go to the DB vector srores
+3. Then it will go tht LLM and prompt 
+4. then we got the answer
+
+the process in code:
+1. load the data and breake into chunks
+2. convert that chunks into vectors and store in Vector DB
+3. Initialize the model and prompts
+for ollama please run the model in backend
+4. combine the both model and prompts using below function which provided by langchain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+documents_chain = create_stuff_documents_chain(llm, prompt)
+
+5. Make the DB as retriever
+DB.as_retriever()
+
+6. combine the retriever with the documents chain
+from langchain.chains import create_retrieval_chain
+ret_chain = create_retrieval_chain(db,documents_chain)
+
+7. give the input and take the output
+response = ret_chain.invoke({"input":"Scaled Dot-Product Attention"})
+response['answer']
+
