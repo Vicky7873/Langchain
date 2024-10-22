@@ -71,3 +71,45 @@ ret_chain = create_retrieval_chain(db,documents_chain)
 response = ret_chain.invoke({"input":"Scaled Dot-Product Attention"})
 response['answer']
 
+=================================================================================================
+Multiple Nodes Search 
+like wiki+arxiv+other Search[ex: pdf] -> llm ->
+
+agents in LangChain are like smart helpers that can figure out what steps to take to complete a task. Here’s what they do:
+
+Make Decisions: They think about the problem and decide what to do next. For example, if you ask a question, 
+the agent will figure out if it needs to look something up, do a calculation, or ask for more information.
+
+Use Tools: Agents can use different tools like a search engine or a database to find the right information. 
+They pick the right tool based on the task.
+
+Adaptable: They don’t follow a strict set of rules. Instead, they adapt and choose actions step-by-step based on what they 
+learn along the way.
+
+code:
+api_wrapper = WikipediaAPIWrapper(top_k_results=1,doc_content_chars_max=200)
+wiki = WikipediaQueryRun(api_wrapper=api_wrapper)
+
+WikipediaAPIWrapper:
+This class allows you to search Wikipedia.
+It limits the number of results (in this case, only 1 result) and controls how much of the article's text you get(up to 200 characters).
+
+WikipediaQueryRun:
+This class runs the actual Wikipedia search using the WikipediaAPIWrapper.
+When you ask it a question, it fetches relevant information from Wikipedia based on the limits you set.
+
+create_retriever_tool is more about creating a specialized tool for complex workflows, while db.as_retriever() is a simple way to 
+get a retriever from your vector database for immediate use.
+
+in simple english "create_retriever_tool" is used to make "db.as_retriever()" as a tool for other pipelines in langchain
+
+====================================================================
+session_state in streamlit:
+
+st.session_state is like a notebook for your Streamlit app. It lets you save information (like user input or selections) 
+so it doesn’t get lost when the app reloads.
+
+Example:
+Imagine you have a form where a user types their name. Every time they hit a button, the app refreshes, and the name would 
+usually disappear.
+With st.session_state, the app "remembers" the name even after the user interacts with other parts of the app.
