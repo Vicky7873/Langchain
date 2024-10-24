@@ -10,6 +10,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from langchain_core.documents import Document
 import time
+from langchain_chains import LLMObjectBoxChain
 
 # Load environment variables
 load_dotenv()
@@ -59,7 +60,7 @@ def vector_embeddings():
             encode_kwargs={"normalize_embeddings": True}
         )
 
-        st.session_state.db = ObjectBox.from_documents(embeddings, final_docs)
+       
 
 input_text = st.text_input("Enter Your Question From Documents")
 if st.button("Documents Embedding"):

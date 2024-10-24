@@ -21,3 +21,4 @@ sentence_transformers
 langchain_openai
 langchain-groq
 groq
+langchain-objectbox
