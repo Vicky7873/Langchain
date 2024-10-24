@@ -17,8 +17,7 @@ sentence-transformers
 arxiv
 wikipedia
 langchainhub
-sentence_transformers
 langchain_openai
 langchain-groq
-groq
 langchain-objectbox
+langsmith
